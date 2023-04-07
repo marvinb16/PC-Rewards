@@ -39,39 +39,17 @@ public class PcRewardsPlugin extends Plugin
 
 	@Override
 	protected void shutDown() throws Exception {
-		//log.info("PC Rewards Customize stopped!");
 	}
 
 	@Subscribe
 	private void onConfigChanged(ConfigChanged event) {
 
 		hideOptions();
-		//log.info("Started PC Rewards");
 
 	}
 
 	@Subscribe
 	public void onGameStateChanged(GameStateChanged gameStateChanged) {
-        /*if (gameStateChanged.getGameState() == GameState.LOGGED_IN) {
-			client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "PC Rewards Customize says " + config.greeting(), null);
-			log.info("Started PC Rewards");
-			Widget points_Screen = client.getWidget(15925251);
-			Widget rewards[] = points_Screen.getDynamicChildren();
-			log.info("Reward len: {}", rewards.length);
-			log.info("Rewards: {}", rewards[2].toString());
-
-			rewards[3].setHidden(true);
-			rewards[2].setHidden(true);
-
-			rewards[7].setHidden(true);
-
-
-			Widget points = client.getWidget(15925256);
-			String input = points.getText();
-			String value_points = input.substring(input.indexOf(">") + 1, input.lastIndexOf("<"));
-			log.info("Raw points are: {}", value_points);
-
-		}*/
 	}
 
 
@@ -83,11 +61,9 @@ public class PcRewardsPlugin extends Plugin
 			return;
 		}
 		if (pc_shop_interface.getId() == 15925251){
-			//log.info("An item in the PC has been chekced");
 			clientThread.invokeAtTickEnd(() ->
 			{
 				hideOptions();
-				//log.info("Started PC Rewards");
 
 			});
 		}
@@ -97,15 +73,12 @@ public class PcRewardsPlugin extends Plugin
 
 	@Subscribe
 	public void onWidgetLoaded(WidgetLoaded widgetLoaded) {
-		//PC Rewards screen is 243
-		//log.info("Widget loaded: {}", widgetLoaded.toString());
-		//log.info("Widget ID: {}", widgetLoaded.getGroupId());
+
 		if (widgetLoaded.getGroupId() == 243) {
 
 			clientThread.invokeAtTickEnd(() ->
 			{
 				hideOptions();
-				//log.info("Started PC Rewards");
 
 			});
 
@@ -113,13 +86,6 @@ public class PcRewardsPlugin extends Plugin
 		}
 	}
 
-/*	@Subscribe
-	public void onWidgetClosed(WidgetClosed event) {
-		int groupId = event.getGroupId();
-		if (groupId == 243) {
-			log.info("Closed PC interface");
-		}
-	}*/
 
 	private void hideOptions(){
 		Widget points_Screen = client.getWidget(15925251);
@@ -130,14 +96,6 @@ public class PcRewardsPlugin extends Plugin
 		String value_points = input.substring(input.indexOf(">") + 1, input.lastIndexOf("<"));
 		int total_points = Integer.parseInt(value_points);
 
-        /*
-		enum RewardOptions
-	{
-		ALL, None are hidden
-		NONE, All are hidden
-		ONLY_100, only 100
-		GREATER_THAN_100 if points >= 100 do none, else all
-	} */
 		switch (config.getAtkOp()){
 			case ALL:
 				rewards[2].setHidden(false); // 1pt
