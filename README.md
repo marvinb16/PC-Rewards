@@ -1,2 +1,2 @@
-# Example
-An example greeter plugin
+# PC Rewards Customize
+Customize Pest Control rewards screen
