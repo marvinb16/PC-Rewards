@@ -5,7 +5,7 @@ import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.ConfigSection;
 
-@ConfigGroup("pcrewardscustomize")
+@ConfigGroup("pcrewards")
 public interface PcRewardsConfig extends Config
 {
 	enum RewardOptions
