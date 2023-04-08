@@ -16,7 +16,7 @@ import net.runelite.api.events.MenuOptionClicked;
 
 @Slf4j
 @PluginDescriptor(
-		name = "PC Rewards Customize",
+		name = "PC Rewards",
 		description = "Customize the PC Rewards screen to prevent unwanted spending"
 )
 public class PcRewardsPlugin extends Plugin
@@ -89,250 +89,256 @@ public class PcRewardsPlugin extends Plugin
 
 	private void hideOptions(){
 		Widget points_Screen = client.getWidget(15925251);
-		Widget rewards[] = points_Screen.getDynamicChildren();
 
-		Widget points = client.getWidget(15925256);
-		String input = points.getText();
-		String value_points = input.substring(input.indexOf(">") + 1, input.lastIndexOf("<"));
-		int total_points = Integer.parseInt(value_points);
+		if (points_Screen != null) {
+			Widget rewards[] = points_Screen.getDynamicChildren();
 
-		switch (config.getAtkOp()){
-			case ALL:
-				rewards[2].setHidden(false); // 1pt
-				rewards[3].setHidden(false); // 10 pt
-				rewards[4].setHidden(false); // 100 pt
-				break;
-			case NONE:
-				rewards[2].setHidden(true); // 1pt
-				rewards[3].setHidden(true); // 10 pt
-				rewards[4].setHidden(true); // 100 pt
-				//rewards[0].setHidden(true); // icon
-				//rewards[1].setHidden(true); // text
-				break;
-			case ONLY_100:
-				rewards[2].setHidden(true); // 1pt
-				rewards[3].setHidden(true); // 10 pt
-				rewards[4].setHidden(false); // 100 pt
-				break;
-			case GREATER_THAN_100:
-				if (total_points < 100) {
+			Widget points = client.getWidget(15925256);
+			String input = points.getText();
+			String value_points = input.substring(input.indexOf(">") + 1, input.lastIndexOf("<"));
+			int total_points = Integer.parseInt(value_points);
+
+			switch (config.getAtkOp()) {
+				case ALL:
 					rewards[2].setHidden(false); // 1pt
 					rewards[3].setHidden(false); // 10 pt
 					rewards[4].setHidden(false); // 100 pt
-				} else {
+					break;
+				case NONE:
+					rewards[2].setHidden(true); // 1pt
+					rewards[3].setHidden(true); // 10 pt
+					rewards[4].setHidden(true); // 100 pt
+					//rewards[0].setHidden(true); // icon
+					//rewards[1].setHidden(true); // text
+					break;
+				case ONLY_100:
 					rewards[2].setHidden(true); // 1pt
 					rewards[3].setHidden(true); // 10 pt
 					rewards[4].setHidden(false); // 100 pt
-				}
-				break;
-		}
+					break;
+				case GREATER_THAN_100:
+					if (total_points < 100) {
+						rewards[2].setHidden(false); // 1pt
+						rewards[3].setHidden(false); // 10 pt
+						rewards[4].setHidden(false); // 100 pt
+					} else {
+						rewards[2].setHidden(true); // 1pt
+						rewards[3].setHidden(true); // 10 pt
+						rewards[4].setHidden(false); // 100 pt
+					}
+					break;
+			}
 
-		switch (config.getStrOp()){
-			case ALL:
-				rewards[7].setHidden(false); // 1pt
-				rewards[8].setHidden(false); // 10 pt
-				rewards[9].setHidden(false); // 100 pt
-				break;
-			case NONE:
-				rewards[7].setHidden(true); // 1pt
-				rewards[8].setHidden(true); // 10 pt
-				rewards[9].setHidden(true); // 100 pt
-				break;
-			case ONLY_100:
-				rewards[7].setHidden(true); // 1pt
-				rewards[8].setHidden(true); // 10 pt
-				rewards[9].setHidden(false); // 100 pt
-				break;
-			case GREATER_THAN_100:
-				if (total_points < 100) {
+			switch (config.getStrOp()) {
+				case ALL:
 					rewards[7].setHidden(false); // 1pt
 					rewards[8].setHidden(false); // 10 pt
 					rewards[9].setHidden(false); // 100 pt
-				} else {
+					break;
+				case NONE:
+					rewards[7].setHidden(true); // 1pt
+					rewards[8].setHidden(true); // 10 pt
+					rewards[9].setHidden(true); // 100 pt
+					break;
+				case ONLY_100:
 					rewards[7].setHidden(true); // 1pt
 					rewards[8].setHidden(true); // 10 pt
 					rewards[9].setHidden(false); // 100 pt
-				}
-				break;
-		}
+					break;
+				case GREATER_THAN_100:
+					if (total_points < 100) {
+						rewards[7].setHidden(false); // 1pt
+						rewards[8].setHidden(false); // 10 pt
+						rewards[9].setHidden(false); // 100 pt
+					} else {
+						rewards[7].setHidden(true); // 1pt
+						rewards[8].setHidden(true); // 10 pt
+						rewards[9].setHidden(false); // 100 pt
+					}
+					break;
+			}
 
-		switch (config.getDefOp()){
-			case ALL:
-				rewards[12].setHidden(false); // 1pt
-				rewards[13].setHidden(false); // 10 pt
-				rewards[14].setHidden(false); // 100 pt
-				break;
-			case NONE:
-				rewards[12].setHidden(true); // 1pt
-				rewards[13].setHidden(true); // 10 pt
-				rewards[14].setHidden(true); // 100 pt
-				break;
-			case ONLY_100:
-				rewards[12].setHidden(true); // 1pt
-				rewards[13].setHidden(true); // 10 pt
-				rewards[14].setHidden(false); // 100 pt
-				break;
-			case GREATER_THAN_100:
-				if (total_points < 100) {
+			switch (config.getDefOp()) {
+				case ALL:
 					rewards[12].setHidden(false); // 1pt
 					rewards[13].setHidden(false); // 10 pt
 					rewards[14].setHidden(false); // 100 pt
-				} else {
+					break;
+				case NONE:
+					rewards[12].setHidden(true); // 1pt
+					rewards[13].setHidden(true); // 10 pt
+					rewards[14].setHidden(true); // 100 pt
+					break;
+				case ONLY_100:
 					rewards[12].setHidden(true); // 1pt
 					rewards[13].setHidden(true); // 10 pt
 					rewards[14].setHidden(false); // 100 pt
-				}
-				break;
-		}
+					break;
+				case GREATER_THAN_100:
+					if (total_points < 100) {
+						rewards[12].setHidden(false); // 1pt
+						rewards[13].setHidden(false); // 10 pt
+						rewards[14].setHidden(false); // 100 pt
+					} else {
+						rewards[12].setHidden(true); // 1pt
+						rewards[13].setHidden(true); // 10 pt
+						rewards[14].setHidden(false); // 100 pt
+					}
+					break;
+			}
 
-		switch (config.getRngOp()){
-			case ALL:
-				rewards[17].setHidden(false); // 1pt
-				rewards[18].setHidden(false); // 10 pt
-				rewards[19].setHidden(false); // 100 pt
-				break;
-			case NONE:
-				rewards[17].setHidden(true); // 1pt
-				rewards[18].setHidden(true); // 10 pt
-				rewards[19].setHidden(true); // 100 pt
-				break;
-			case ONLY_100:
-				rewards[17].setHidden(true); // 1pt
-				rewards[18].setHidden(true); // 10 pt
-				rewards[19].setHidden(false); // 100 pt
-				break;
-			case GREATER_THAN_100:
-				if (total_points < 100) {
+			switch (config.getRngOp()) {
+				case ALL:
 					rewards[17].setHidden(false); // 1pt
 					rewards[18].setHidden(false); // 10 pt
 					rewards[19].setHidden(false); // 100 pt
-				} else {
+					break;
+				case NONE:
+					rewards[17].setHidden(true); // 1pt
+					rewards[18].setHidden(true); // 10 pt
+					rewards[19].setHidden(true); // 100 pt
+					break;
+				case ONLY_100:
 					rewards[17].setHidden(true); // 1pt
 					rewards[18].setHidden(true); // 10 pt
 					rewards[19].setHidden(false); // 100 pt
-				}
-				break;
-		}
+					break;
+				case GREATER_THAN_100:
+					if (total_points < 100) {
+						rewards[17].setHidden(false); // 1pt
+						rewards[18].setHidden(false); // 10 pt
+						rewards[19].setHidden(false); // 100 pt
+					} else {
+						rewards[17].setHidden(true); // 1pt
+						rewards[18].setHidden(true); // 10 pt
+						rewards[19].setHidden(false); // 100 pt
+					}
+					break;
+			}
 
-		switch (config.getMagicOp()){
-			case ALL:
-				rewards[22].setHidden(false); // 1pt
-				rewards[23].setHidden(false); // 10 pt
-				rewards[24].setHidden(false); // 100 pt
-				break;
-			case NONE:
-				rewards[22].setHidden(true); // 1pt
-				rewards[23].setHidden(true); // 10 pt
-				rewards[24].setHidden(true); // 100 pt
-				break;
-			case ONLY_100:
-				rewards[22].setHidden(true); // 1pt
-				rewards[23].setHidden(true); // 10 pt
-				rewards[24].setHidden(false); // 100 pt
-				break;
-			case GREATER_THAN_100:
-				if (total_points < 100) {
+			switch (config.getMagicOp()) {
+				case ALL:
 					rewards[22].setHidden(false); // 1pt
 					rewards[23].setHidden(false); // 10 pt
 					rewards[24].setHidden(false); // 100 pt
-				} else {
+					break;
+				case NONE:
+					rewards[22].setHidden(true); // 1pt
+					rewards[23].setHidden(true); // 10 pt
+					rewards[24].setHidden(true); // 100 pt
+					break;
+				case ONLY_100:
 					rewards[22].setHidden(true); // 1pt
 					rewards[23].setHidden(true); // 10 pt
 					rewards[24].setHidden(false); // 100 pt
-				}
-				break;
-		}
+					break;
+				case GREATER_THAN_100:
+					if (total_points < 100) {
+						rewards[22].setHidden(false); // 1pt
+						rewards[23].setHidden(false); // 10 pt
+						rewards[24].setHidden(false); // 100 pt
+					} else {
+						rewards[22].setHidden(true); // 1pt
+						rewards[23].setHidden(true); // 10 pt
+						rewards[24].setHidden(false); // 100 pt
+					}
+					break;
+			}
 
-		switch (config.getHpOp()){
-			case ALL:
-				rewards[27].setHidden(false); // 1pt
-				rewards[28].setHidden(false); // 10 pt
-				rewards[29].setHidden(false); // 100 pt
-				break;
-			case NONE:
-				rewards[27].setHidden(true); // 1pt
-				rewards[28].setHidden(true); // 10 pt
-				rewards[29].setHidden(true); // 100 pt
-				break;
-			case ONLY_100:
-				rewards[27].setHidden(true); // 1pt
-				rewards[28].setHidden(true); // 10 pt
-				rewards[29].setHidden(false); // 100 pt
-				break;
-			case GREATER_THAN_100:
-				if (total_points < 100) {
+			switch (config.getHpOp()) {
+				case ALL:
 					rewards[27].setHidden(false); // 1pt
 					rewards[28].setHidden(false); // 10 pt
 					rewards[29].setHidden(false); // 100 pt
-				} else {
+					break;
+				case NONE:
+					rewards[27].setHidden(true); // 1pt
+					rewards[28].setHidden(true); // 10 pt
+					rewards[29].setHidden(true); // 100 pt
+					break;
+				case ONLY_100:
 					rewards[27].setHidden(true); // 1pt
 					rewards[28].setHidden(true); // 10 pt
 					rewards[29].setHidden(false); // 100 pt
-				}
-				break;
-		}
+					break;
+				case GREATER_THAN_100:
+					if (total_points < 100) {
+						rewards[27].setHidden(false); // 1pt
+						rewards[28].setHidden(false); // 10 pt
+						rewards[29].setHidden(false); // 100 pt
+					} else {
+						rewards[27].setHidden(true); // 1pt
+						rewards[28].setHidden(true); // 10 pt
+						rewards[29].setHidden(false); // 100 pt
+					}
+					break;
+			}
 
-		switch (config.getPrayOp()){
-			case ALL:
-				rewards[32].setHidden(false); // 1pt
-				rewards[33].setHidden(false); // 10 pt
-				rewards[34].setHidden(false); // 100 pt
-				break;
-			case NONE:
-				rewards[32].setHidden(true); // 1pt
-				rewards[33].setHidden(true); // 10 pt
-				rewards[34].setHidden(true); // 100 pt
-				break;
-			case ONLY_100:
-				rewards[32].setHidden(true); // 1pt
-				rewards[33].setHidden(true); // 10 pt
-				rewards[34].setHidden(false); // 100 pt
-				break;
-			case GREATER_THAN_100:
-				if (total_points < 100) {
+			switch (config.getPrayOp()) {
+				case ALL:
 					rewards[32].setHidden(false); // 1pt
 					rewards[33].setHidden(false); // 10 pt
 					rewards[34].setHidden(false); // 100 pt
-				} else {
+					break;
+				case NONE:
+					rewards[32].setHidden(true); // 1pt
+					rewards[33].setHidden(true); // 10 pt
+					rewards[34].setHidden(true); // 100 pt
+					break;
+				case ONLY_100:
 					rewards[32].setHidden(true); // 1pt
 					rewards[33].setHidden(true); // 10 pt
 					rewards[34].setHidden(false); // 100 pt
-				}
-				break;
+					break;
+				case GREATER_THAN_100:
+					if (total_points < 100) {
+						rewards[32].setHidden(false); // 1pt
+						rewards[33].setHidden(false); // 10 pt
+						rewards[34].setHidden(false); // 100 pt
+					} else {
+						rewards[32].setHidden(true); // 1pt
+						rewards[33].setHidden(true); // 10 pt
+						rewards[34].setHidden(false); // 100 pt
+					}
+					break;
+			}
+
+			// HERB OPTION
+			rewards[40].setHidden(config.getHerb());
+
+			// MINERAL OPTION
+			rewards[44].setHidden(config.getMine());
+
+			// SEED OPTION
+			rewards[48].setHidden(config.getSeed());
+
+			// MACE
+			rewards[54].setHidden(config.getMace());
+
+			// Robe Top
+			rewards[58].setHidden(config.getRTop());
+
+			// robe bottoms
+			rewards[62].setHidden(config.getRBtm());
+
+			// gloves
+			rewards[66].setHidden(config.getGlove());
+
+			// mage helm
+			rewards[70].setHidden(config.getMageHelm());
+
+			// range helm
+			rewards[74].setHidden(config.getRhelm());
+
+			// melee helm
+			rewards[78].setHidden(config.getMelHelm());
+
+			// seal
+			rewards[82].setHidden(config.getSeal());
 		}
-
-		// HERB OPTION
-		rewards[40].setHidden(config.getHerb());
-
-		// MINERAL OPTION
-		rewards[44].setHidden(config.getMine());
-
-		// SEED OPTION
-		rewards[48].setHidden(config.getSeed());
-
-		// MACE
-		rewards[54].setHidden(config.getMace());
-
-		// Robe Top
-		rewards[58].setHidden(config.getRTop());
-
-		// robe bottoms
-		rewards[62].setHidden(config.getRBtm());
-
-		// gloves
-		rewards[66].setHidden(config.getGlove());
-
-		// mage helm
-		rewards[70].setHidden(config.getMageHelm());
-
-		// range helm
-		rewards[74].setHidden(config.getRhelm());
-
-		// melee helm
-		rewards[78].setHidden(config.getMelHelm());
-
-		// seal
-		rewards[82].setHidden(config.getSeal());
+		else {
+			return;
+		}
 
 
 	}

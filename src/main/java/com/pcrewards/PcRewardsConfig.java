@@ -5,7 +5,7 @@ import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.ConfigSection;
 
-@ConfigGroup("pcrewardscustomize")
+@ConfigGroup("pcrewards")
 public interface PcRewardsConfig extends Config
 {
 	enum RewardOptions
@@ -41,8 +41,8 @@ public interface PcRewardsConfig extends Config
 	@ConfigItem(
 			position = 1,
 			keyName = "attack",
-			name = "Attack Exp",
-			description = "Configure what Attack Exp options displayed.",
+			name = "Attack",
+			description = "Configure what Attack experience options displayed.",
 			section = expSection
 	)
 	default RewardOptions getAtkOp(){
@@ -51,8 +51,8 @@ public interface PcRewardsConfig extends Config
 	@ConfigItem(
 			position = 2,
 			keyName = "strength",
-			name = "Strength Exp",
-			description = "Configure what Strength Exp options displayed.",
+			name = "Strength",
+			description = "Configure what Strength experience options displayed.",
 			section = expSection
 	)
 	default RewardOptions getStrOp(){
@@ -61,8 +61,8 @@ public interface PcRewardsConfig extends Config
 	@ConfigItem(
 			position = 3,
 			keyName = "defence",
-			name = "Defence Exp",
-			description = "Configure what Defence Exp options displayed.",
+			name = "Defence",
+			description = "Configure what Defence experience options displayed.",
 			section = expSection
 	)
 	default RewardOptions getDefOp(){
@@ -71,8 +71,8 @@ public interface PcRewardsConfig extends Config
 	@ConfigItem(
 			position = 4,
 			keyName = "range",
-			name = "Range Exp",
-			description = "Configure what Range Exp options displayed.",
+			name = "Range",
+			description = "Configure what Range experience options displayed.",
 			section = expSection
 	)
 	default RewardOptions getRngOp(){
@@ -81,8 +81,8 @@ public interface PcRewardsConfig extends Config
 	@ConfigItem(
 			position = 5,
 			keyName = "magic",
-			name = "Magic Exp",
-			description = "Configure what Magic Exp options displayed.",
+			name = "Magic",
+			description = "Configure what Magic experience options displayed.",
 			section = expSection
 	)
 	default RewardOptions getMagicOp(){
@@ -91,8 +91,8 @@ public interface PcRewardsConfig extends Config
 	@ConfigItem(
 			position = 6,
 			keyName = "hitpoints",
-			name = "Hitpoints Exp",
-			description = "Configure what Hitpoints Exp options displayed.",
+			name = "Hitpoints",
+			description = "Configure what Hitpoints experience options displayed.",
 			section = expSection
 	)
 	default RewardOptions getHpOp(){
@@ -101,8 +101,8 @@ public interface PcRewardsConfig extends Config
 	@ConfigItem(
 			position = 7,
 			keyName = "prayer",
-			name = "Prayer Exp",
-			description = "Configure what Prayer Exp options displayed.",
+			name = "Prayer",
+			description = "Configure what Prayer experience options displayed.",
 			section = expSection
 	)
 	default RewardOptions getPrayOp(){
