@@ -16,7 +16,7 @@ import net.runelite.api.events.MenuOptionClicked;
 
 @Slf4j
 @PluginDescriptor(
-		name = "PC Rewards Customize",
+		name = "PC Rewards",
 		description = "Customize the PC Rewards screen to prevent unwanted spending"
 )
 public class PcRewardsPlugin extends Plugin
