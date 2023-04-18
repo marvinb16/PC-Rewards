@@ -1,3 +1,27 @@
+/*
+ * Copyright (c) 2023, Marvinb16
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 package com.pcrewards;
 
 import com.google.inject.Provides;
@@ -17,7 +41,8 @@ import net.runelite.api.events.MenuOptionClicked;
 @Slf4j
 @PluginDescriptor(
 		name = "PC Rewards",
-		description = "Customize the PC Rewards screen to prevent unwanted spending"
+		description = "Customize the PC Rewards screen to prevent unwanted spending",
+		tags = {"pest control", "pc", "minigame", "hide", "points"}
 )
 public class PcRewardsPlugin extends Plugin
 {
@@ -34,11 +59,24 @@ public class PcRewardsPlugin extends Plugin
 	@Override
 	protected void startUp() throws Exception {
 
+		Widget points_Screen = client.getWidget(15925251);
+
+		if (points_Screen == null) { return; }
+		else {
+			clientThread.invokeAtTickEnd(() ->
+		{
+			hideOptions();
+
+		});
+		}
+
 
 	}
 
 	@Override
 	protected void shutDown() throws Exception {
+		//Restores all interfaces to normal
+		unhide_ALL();
 	}
 
 	@Subscribe
@@ -95,10 +133,15 @@ public class PcRewardsPlugin extends Plugin
 
 		Widget rewards[] = points_Screen.getDynamicChildren();
 
-		Widget points = client.getWidget(15925256);
-		String input = points.getText();
-		String value_points = input.substring(input.indexOf(">") + 1, input.lastIndexOf("<"));
-		int total_points = Integer.parseInt(value_points);
+		Widget points_loc = client.getWidget(15925256);
+
+		String points_text = points_loc.getText();
+
+		String value_points = points_text.substring(points_text.indexOf(">") + 1, points_text.lastIndexOf("<"));
+		// Fixed crash when points is >= 1000, the "," caused a crash.
+		String fixed_points = value_points.replace(",", "");
+
+		int total_points = Integer.parseInt(fixed_points);
 
 		switch (config.getAtkOp()) {
 			case ALL:
@@ -338,6 +381,22 @@ public class PcRewardsPlugin extends Plugin
 		// seal
 		rewards[82].setHidden(config.getSeal());
 
+
+	}
+
+	private void unhide_ALL() {
+
+		Widget points_Screen = client.getWidget(15925251);
+
+		if (points_Screen == null) { return; }
+
+		Widget rewards[] = points_Screen.getDynamicChildren();
+
+		for (int i = 0; i < rewards.length; i++){
+			if (rewards[i].isSelfHidden()){
+				rewards[i].setHidden(false);
+			}
+		}
 
 	}
 
