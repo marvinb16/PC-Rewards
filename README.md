@@ -12,5 +12,5 @@ The experience rewards section has several display options
 ## Todo:
 - Add Exp calculations based on current level and exp
 
-## Preview of interface
+## Preview
 ![preview_pcrewards_update.PNG](preview_pcrewards_update.PNG)
