@@ -9,8 +9,9 @@ The experience rewards section has several display options
 - Only 100 - Only will show the 100 point options
 - Greater Than 100 - If total points > 100, only shows 100, if under 100, shows all options
 
-## Todo:
-- Add Exp calculations based on current level and exp
+## Changes
+- Fixed crash when points are over 1,000
+- Added Exp Calculations on shop interface
 
-## Preview
-![preview_pcrewards_update.PNG](preview_pcrewards_update.PNG)
+## Screenshot
+![PC_Rewards_Preview.PNG](PC_Rewards_Preview.PNG)

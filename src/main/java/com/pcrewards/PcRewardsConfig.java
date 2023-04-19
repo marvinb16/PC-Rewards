@@ -29,6 +29,8 @@ import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.ConfigSection;
 
+import com.pcrewards.PcRewardOptions;
+
 @ConfigGroup("pcrewards")
 public interface PcRewardsConfig extends Config
 {
@@ -49,7 +51,7 @@ public interface PcRewardsConfig extends Config
 	@ConfigSection(
 			name = "Exp Rewards",
 			description = "Configure what exp rewards you want displayed",
-			position = 0
+			position = 96
 	)
 	String expSection = "experience";
 	@ConfigSection(
@@ -61,6 +63,15 @@ public interface PcRewardsConfig extends Config
 
 
 
+
+	@ConfigItem(
+			position = 0,
+			keyName = "displayExp",
+			name = "Exp Calculation",
+			description = "Calculate experience from current points",
+			section = expSection
+	)
+	default PcRewardOptions getCalcStyle() { return PcRewardOptions.PRAYER; }
 
 	@ConfigItem(
 			position = 1,

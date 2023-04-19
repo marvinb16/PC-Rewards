@@ -30,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.events.*;
 import net.runelite.client.config.ConfigManager;
+import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
@@ -37,6 +38,8 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.api.events.MenuOptionClicked;
+
+import com.pcrewards.PcRewardsDrawWidget;
 
 @Slf4j
 @PluginDescriptor(
@@ -46,6 +49,11 @@ import net.runelite.api.events.MenuOptionClicked;
 )
 public class PcRewardsPlugin extends Plugin
 {
+	public static final int PC_SHOP_WIDGET_ID = 15925251;
+	public static final int PC_SHOP_GROUP_ID = 243;
+
+	public static final int PC_POINTS_WIDGET_ID = 15925256;
+
 	@Inject
 	private Client client;
 
@@ -55,16 +63,23 @@ public class PcRewardsPlugin extends Plugin
 	@Inject
 	private PcRewardsConfig config;
 
+	@Inject
+	private PcRewardsDrawWidget drawPcWidget;
+
 
 	@Override
 	protected void startUp() throws Exception {
 
-		Widget points_Screen = client.getWidget(15925251);
+
+
+
+		Widget points_Screen = client.getWidget(PC_SHOP_WIDGET_ID);
 
 		if (points_Screen == null) { return; }
 		else {
 			clientThread.invokeAtTickEnd(() ->
 		{
+			drawPcWidget.draw_Widget(get_Pest_Points());
 			hideOptions();
 
 		});
@@ -77,19 +92,17 @@ public class PcRewardsPlugin extends Plugin
 	protected void shutDown() throws Exception {
 		//Restores all interfaces to normal
 		unhide_ALL();
+		drawPcWidget.delete_Widget();
+
 	}
 
 	@Subscribe
 	private void onConfigChanged(ConfigChanged event) {
 
 		hideOptions();
+		drawPcWidget.update_Calculation();
 
 	}
-
-	@Subscribe
-	public void onGameStateChanged(GameStateChanged gameStateChanged) {
-	}
-
 
 	@Subscribe
 	public void onMenuOptionClicked(MenuOptionClicked menuOptionClicked) {
@@ -98,7 +111,7 @@ public class PcRewardsPlugin extends Plugin
 		if (pc_shop_interface == null) {
 			return;
 		}
-		if (pc_shop_interface.getId() == 15925251){
+		if (pc_shop_interface.getId() == PC_SHOP_WIDGET_ID){
 			clientThread.invokeAtTickEnd(() ->
 			{
 				hideOptions();
@@ -112,10 +125,11 @@ public class PcRewardsPlugin extends Plugin
 	@Subscribe
 	public void onWidgetLoaded(WidgetLoaded widgetLoaded) {
 
-		if (widgetLoaded.getGroupId() == 243) {
+		if (widgetLoaded.getGroupId() == PC_SHOP_GROUP_ID) {
 
 			clientThread.invokeAtTickEnd(() ->
 			{
+				drawPcWidget.draw_Widget(get_Pest_Points());
 				hideOptions();
 
 			});
@@ -127,21 +141,13 @@ public class PcRewardsPlugin extends Plugin
 
 	private void hideOptions(){
 
-		Widget points_Screen = client.getWidget(15925251);
+		Widget points_Screen = client.getWidget(PC_SHOP_WIDGET_ID);
 
 		if (points_Screen == null) { return; }
 
 		Widget rewards[] = points_Screen.getDynamicChildren();
 
-		Widget points_loc = client.getWidget(15925256);
-
-		String points_text = points_loc.getText();
-
-		String value_points = points_text.substring(points_text.indexOf(">") + 1, points_text.lastIndexOf("<"));
-		// Fixed crash when points is >= 1000, the "," caused a crash.
-		String fixed_points = value_points.replace(",", "");
-
-		int total_points = Integer.parseInt(fixed_points);
+		int total_points = get_Pest_Points();
 
 		switch (config.getAtkOp()) {
 			case ALL:
@@ -386,7 +392,7 @@ public class PcRewardsPlugin extends Plugin
 
 	private void unhide_ALL() {
 
-		Widget points_Screen = client.getWidget(15925251);
+		Widget points_Screen = client.getWidget(PC_SHOP_WIDGET_ID);
 
 		if (points_Screen == null) { return; }
 
@@ -399,6 +405,20 @@ public class PcRewardsPlugin extends Plugin
 		}
 
 	}
+
+	private int get_Pest_Points() {
+
+		Widget points_loc = client.getWidget(PC_POINTS_WIDGET_ID);
+
+		String points_text = points_loc.getText();
+
+		String value_points = points_text.substring(points_text.indexOf(">") + 1, points_text.lastIndexOf("<"));
+		// Fixed crash when points is >= 1000, the "," caused a crash.
+		String fixed_points = value_points.replace(",", "");
+
+		return Integer.parseInt(fixed_points);
+	}
+
 
 
 	@Provides
