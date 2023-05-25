@@ -7,8 +7,8 @@ public enum PcRewardOptions {
     RANGE("Ranged"),
     MAGIC("Magic"),
     HITPOINTS("Hitpoints"),
-    PRAYER("Prayer");
-
+    PRAYER("Prayer"),
+    HIDE("Hide");
 
     private final String abbrev;
 
@@ -20,4 +20,5 @@ public enum PcRewardOptions {
     public String toString() {
         return abbrev;
     }
+
 }

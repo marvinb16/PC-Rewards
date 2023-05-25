@@ -30,17 +30,11 @@ import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.ConfigSection;
 
 import com.pcrewards.PcRewardOptions;
+import com.pcrewards.PcRewardsConfigOptions;
 
 @ConfigGroup("pcrewards")
 public interface PcRewardsConfig extends Config
 {
-	enum RewardOptions
-	{
-		ALL,
-		NONE,
-		ONLY_100,
-		GREATER_THAN_100
-	}
 
 	@ConfigSection(
 			name = "Armor Rewards",
@@ -80,8 +74,8 @@ public interface PcRewardsConfig extends Config
 			description = "Configure what Attack experience options displayed.",
 			section = expSection
 	)
-	default RewardOptions getAtkOp(){
-		return RewardOptions.ALL;
+	default PcRewardsConfigOptions getAtkOp(){
+		return PcRewardsConfigOptions.ALL;
 	}
 	@ConfigItem(
 			position = 2,
@@ -90,8 +84,8 @@ public interface PcRewardsConfig extends Config
 			description = "Configure what Strength experience options displayed.",
 			section = expSection
 	)
-	default RewardOptions getStrOp(){
-		return RewardOptions.ALL;
+	default PcRewardsConfigOptions getStrOp(){
+		return PcRewardsConfigOptions.ALL;
 	}
 	@ConfigItem(
 			position = 3,
@@ -100,8 +94,8 @@ public interface PcRewardsConfig extends Config
 			description = "Configure what Defence experience options displayed.",
 			section = expSection
 	)
-	default RewardOptions getDefOp(){
-		return RewardOptions.ALL;
+	default PcRewardsConfigOptions getDefOp(){
+		return PcRewardsConfigOptions.ALL;
 	}
 	@ConfigItem(
 			position = 4,
@@ -110,8 +104,8 @@ public interface PcRewardsConfig extends Config
 			description = "Configure what Range experience options displayed.",
 			section = expSection
 	)
-	default RewardOptions getRngOp(){
-		return RewardOptions.ALL;
+	default PcRewardsConfigOptions getRngOp(){
+		return PcRewardsConfigOptions.ALL;
 	}
 	@ConfigItem(
 			position = 5,
@@ -120,8 +114,8 @@ public interface PcRewardsConfig extends Config
 			description = "Configure what Magic experience options displayed.",
 			section = expSection
 	)
-	default RewardOptions getMagicOp(){
-		return RewardOptions.ALL;
+	default PcRewardsConfigOptions getMagicOp(){
+		return PcRewardsConfigOptions.ALL;
 	}
 	@ConfigItem(
 			position = 6,
@@ -130,8 +124,8 @@ public interface PcRewardsConfig extends Config
 			description = "Configure what Hitpoints experience options displayed.",
 			section = expSection
 	)
-	default RewardOptions getHpOp(){
-		return RewardOptions.ALL;
+	default PcRewardsConfigOptions getHpOp(){
+		return PcRewardsConfigOptions.ALL;
 	}
 	@ConfigItem(
 			position = 7,
@@ -140,8 +134,8 @@ public interface PcRewardsConfig extends Config
 			description = "Configure what Prayer experience options displayed.",
 			section = expSection
 	)
-	default RewardOptions getPrayOp(){
-		return RewardOptions.ALL;
+	default PcRewardsConfigOptions getPrayOp(){
+		return PcRewardsConfigOptions.ALL;
 	}
 
 

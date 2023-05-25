@@ -47,7 +47,13 @@ public class PcRewardsDrawWidget {
         //Setup the child widget parameters
         drawn_Widget.setFontId(font_ID);
         drawn_Widget.setOpacity(0);
-        drawn_Widget.setHidden(false);
+
+        if (config.getCalcStyle() == PcRewardOptions.HIDE) {
+            drawn_Widget.setHidden(true);
+        } else {
+            drawn_Widget.setHidden(false);
+        }
+
         drawn_Widget.setTextColor(font_Color);
         drawn_Widget.setTextShadowed(true);
 
@@ -70,6 +76,12 @@ public class PcRewardsDrawWidget {
     public void update_Calculation(){
 
         if (drawn_Widget == null) {return;}
+
+        if (config.getCalcStyle() == PcRewardOptions.HIDE){
+            drawn_Widget.setHidden(true);
+        } else {
+            drawn_Widget.setHidden(false);
+        }
 
         String points_String = config.getCalcStyle().toString() + " Exp: <col=ffffff>" + String.format("%,d",calc_Reward_EXP(get_Level(config.getCalcStyle()),saved_points, config.getCalcStyle())) + "</col";
         drawn_Widget.setText(points_String);
@@ -110,6 +122,9 @@ public class PcRewardsDrawWidget {
                 break;
             case PRAYER:
                 level = client.getRealSkillLevel(Skill.PRAYER);
+                break;
+            case HIDE:
+                level = 0;
                 break;
         }
 

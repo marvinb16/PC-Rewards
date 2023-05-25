@@ -67,6 +67,7 @@ public class PcRewardsPlugin extends Plugin
 	private PcRewardsDrawWidget drawPcWidget;
 
 
+
 	@Override
 	protected void startUp() throws Exception {
 
@@ -355,36 +356,47 @@ public class PcRewardsPlugin extends Plugin
 		}
 
 		// HERB OPTION
+		rewards[37].setHidden(config.getHerb());
 		rewards[40].setHidden(config.getHerb());
 
 		// MINERAL OPTION
+		rewards[41].setHidden(config.getMine());
 		rewards[44].setHidden(config.getMine());
 
 		// SEED OPTION
+		rewards[45].setHidden(config.getSeed());
 		rewards[48].setHidden(config.getSeed());
 
 		// MACE
+		rewards[51].setHidden(config.getMace());
 		rewards[54].setHidden(config.getMace());
 
 		// Robe Top
+		rewards[55].setHidden(config.getRTop());
 		rewards[58].setHidden(config.getRTop());
 
 		// robe bottoms
+		rewards[59].setHidden(config.getRBtm());
 		rewards[62].setHidden(config.getRBtm());
 
 		// gloves
+		rewards[63].setHidden(config.getGlove());
 		rewards[66].setHidden(config.getGlove());
 
 		// mage helm
+		rewards[67].setHidden(config.getMageHelm());
 		rewards[70].setHidden(config.getMageHelm());
 
 		// range helm
+		rewards[71].setHidden(config.getRhelm());
 		rewards[74].setHidden(config.getRhelm());
 
 		// melee helm
+		rewards[75].setHidden(config.getMelHelm());
 		rewards[78].setHidden(config.getMelHelm());
 
 		// seal
+		rewards[79].setHidden(config.getSeal());
 		rewards[82].setHidden(config.getSeal());
 
 
