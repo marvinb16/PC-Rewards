@@ -29,8 +29,7 @@ import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.ConfigSection;
 
-import com.pcrewards.PcRewardOptions;
-import com.pcrewards.PcRewardsConfigOptions;
+import com.pcrewards.PcRewardExpOptions;
 
 @ConfigGroup("pcrewards")
 public interface PcRewardsConfig extends Config
@@ -65,7 +64,8 @@ public interface PcRewardsConfig extends Config
 			description = "Calculate experience from current points",
 			section = expSection
 	)
-	default PcRewardOptions getCalcStyle() { return PcRewardOptions.PRAYER; }
+	default PcRewardExpOptions getCalcStyle() { return PcRewardExpOptions.PRAYER; }
+	// This is a different enum from the rest for the exp calculations.
 
 	@ConfigItem(
 			position = 1,

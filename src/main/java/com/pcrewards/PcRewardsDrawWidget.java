@@ -48,7 +48,7 @@ public class PcRewardsDrawWidget {
         drawn_Widget.setFontId(font_ID);
         drawn_Widget.setOpacity(0);
 
-        if (config.getCalcStyle() == PcRewardOptions.HIDE) {
+        if (config.getCalcStyle() == PcRewardExpOptions.HIDE) {
             drawn_Widget.setHidden(true);
         } else {
             drawn_Widget.setHidden(false);
@@ -77,7 +77,7 @@ public class PcRewardsDrawWidget {
 
         if (drawn_Widget == null) {return;}
 
-        if (config.getCalcStyle() == PcRewardOptions.HIDE){
+        if (config.getCalcStyle() == PcRewardExpOptions.HIDE){
             drawn_Widget.setHidden(true);
         } else {
             drawn_Widget.setHidden(false);
@@ -97,11 +97,11 @@ public class PcRewardsDrawWidget {
 
     }
 
-    private int get_Level(PcRewardOptions pcRewardOptions){
+    private int get_Level(PcRewardExpOptions pcRewardExpOptions){
 
         int level = 0;
 
-        switch (pcRewardOptions){
+        switch (pcRewardExpOptions){
             case ATTACK:
                 level = client.getRealSkillLevel(Skill.ATTACK);
                 break;

@@ -1,6 +1,6 @@
 package com.pcrewards;
 
-public enum PcRewardOptions {
+public enum PcRewardExpOptions {
     ATTACK("Attack"),
     STRENGTH("Strength"),
     DEFENCE("Defence"),
@@ -12,7 +12,7 @@ public enum PcRewardOptions {
 
     private final String abbrev;
 
-    PcRewardOptions(String abbrev) {
+    PcRewardExpOptions(String abbrev) {
         this.abbrev = abbrev;
     }
 

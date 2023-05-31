@@ -3,7 +3,7 @@ package com.pcrewards;
 public class PcMath {
 
 
-    public static int calc_Reward_EXP(int level, int points ,PcRewardOptions exp_type){
+    public static int calc_Reward_EXP(int level, int points , PcRewardExpOptions exp_type){
         // Floor(level^2/600) * n where n = 35,32,or 18;
 
         if (level < 25) {return 0;}
