@@ -138,9 +138,19 @@ public interface PcRewardsConfig extends Config
 		return PcRewardsConfigOptions.ALL;
 	}
 
-
 	@ConfigItem(
 			position = 8,
+			keyName = "expMult",
+			name = "Exp. Mult",
+			description = "Configure what Prayer experience options displayed.",
+			section = expSection
+	)
+	default int getExpMult(){
+		return 0;
+	}
+
+	@ConfigItem(
+			position = 9,
 			keyName = "herbpack",
 			name = "Herb Pack",
 			description = "Configure if the Herb pack is displayed.",
@@ -150,7 +160,7 @@ public interface PcRewardsConfig extends Config
 		return false;
 	}
 	@ConfigItem(
-			position = 9,
+			position = 10,
 			keyName = "mineralpack",
 			name = "Mineral Pack",
 			description = "Configure if the Mineral pack is displayed.",
@@ -161,7 +171,7 @@ public interface PcRewardsConfig extends Config
 	}
 
 	@ConfigItem(
-			position = 10,
+			position = 11,
 			keyName = "seedpack",
 			name = "Seed Pack",
 			description = "Configure if the Seed pack is displayed.",
@@ -194,7 +204,7 @@ public interface PcRewardsConfig extends Config
 	}
 
 	@ConfigItem(
-			position = 13,
+			position = 14,
 			keyName = "robebottom",
 			name = "Robe Bottoms",
 			description = "Configure if the Robe Bottom is displayed.",
@@ -205,7 +215,7 @@ public interface PcRewardsConfig extends Config
 	}
 
 	@ConfigItem(
-			position = 14,
+			position = 15,
 			keyName = "gloves",
 			name = "Gloves",
 			description = "Configure if the Gloves are displayed.",
@@ -216,7 +226,7 @@ public interface PcRewardsConfig extends Config
 	}
 
 	@ConfigItem(
-			position = 14,
+			position = 15,
 			keyName = "magehelm",
 			name = "Mage Helm",
 			description = "Configure if the Mage Helm is displayed.",
@@ -227,7 +237,7 @@ public interface PcRewardsConfig extends Config
 	}
 
 	@ConfigItem(
-			position = 15,
+			position = 16,
 			keyName = "rangehelm",
 			name = "Range Helm",
 			description = "Configure if the Range Helm is displayed.",
@@ -238,7 +248,7 @@ public interface PcRewardsConfig extends Config
 	}
 
 	@ConfigItem(
-			position = 16,
+			position = 17,
 			keyName = "meleehelm",
 			name = "Melee Helm",
 			description = "Configure if the Melee Helm is displayed.",
@@ -249,7 +259,7 @@ public interface PcRewardsConfig extends Config
 	}
 
 	@ConfigItem(
-			position = 17,
+			position = 18,
 			keyName = "seal",
 			name = "Seal",
 			description = "Configure if the Seal is displayed.",
@@ -258,6 +268,8 @@ public interface PcRewardsConfig extends Config
 	default boolean getSeal(){
 		return false;
 	}
+
+
 
 
 

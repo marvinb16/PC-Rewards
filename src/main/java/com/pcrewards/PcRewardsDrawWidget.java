@@ -57,7 +57,7 @@ public class PcRewardsDrawWidget {
         drawn_Widget.setTextColor(font_Color);
         drawn_Widget.setTextShadowed(true);
 
-        String points_String = config.getCalcStyle().toString() + " Exp: <col=ffffff>" + String.format("%,d",calc_Reward_EXP(get_Level(config.getCalcStyle()),pest_points, config.getCalcStyle())) + "</col";
+        String points_String = config.getCalcStyle().toString() + " Exp: <col=ffffff>" + String.format("%,d",calc_Reward_EXP(get_Level(config.getCalcStyle()),pest_points, config.getCalcStyle(), config.getExpMult())) + "</col";
         drawn_Widget.setText(points_String);
 
         drawn_Widget.setOriginalHeight(40);
@@ -83,7 +83,7 @@ public class PcRewardsDrawWidget {
             drawn_Widget.setHidden(false);
         }
 
-        String points_String = config.getCalcStyle().toString() + " Exp: <col=ffffff>" + String.format("%,d",calc_Reward_EXP(get_Level(config.getCalcStyle()),saved_points, config.getCalcStyle())) + "</col";
+        String points_String = config.getCalcStyle().toString() + " Exp: <col=ffffff>" + String.format("%,d",calc_Reward_EXP(get_Level(config.getCalcStyle()),saved_points, config.getCalcStyle(), config.getExpMult())) + "</col";
         drawn_Widget.setText(points_String);
 
 

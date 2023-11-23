@@ -3,7 +3,7 @@ package com.pcrewards;
 public class PcMath {
 
 
-    public static int calc_Reward_EXP(int level, int points , PcRewardExpOptions exp_type){
+    public static int calc_Reward_EXP(int level, int points , PcRewardExpOptions exp_type, int league_mult){
         // Floor(level^2/600) * n where n = 35,32,or 18;
 
         if (level < 25) {return 0;}
@@ -27,6 +27,10 @@ public class PcMath {
         }
 
         double exp_per_point = Math.floor((Math.pow(level,2) / 600)) * n_mod;
+
+        if (league_mult > 0 && league_mult <= 16) {
+            exp_per_point = exp_per_point * league_mult;
+        }
 
         int bonus_point_sets = (points / 100) * 100;
         int remaining_points = points % 100;
